@@ -196,7 +196,15 @@ if [ -d "${CONDA_HOME}/envs/${CONDA_ENV}" ]; then
 fi
 
 # Create and activate the environment.
-CMD="conda create -n ${CONDA_ENV} -y python=3.12"
+if [[ "Dawn" == "${SYSTEM}" ]]; then
+    # Require Python version compatible with
+    # wheel of intel-extension-for-tensorflow:
+    # https://pypi.org/project/intel-extension-for-tensorflow/#files
+    PYTHON_VERSION="3.11"
+else
+    PYTHON_VERSION="3.12"
+fi
+CMD="conda create -n ${CONDA_ENV} -y python=${PYTHON_VERSION}"
 echo "${CMD}"
 eval "${CMD}"
 CMD="conda activate ${CONDA_ENV}"
@@ -216,7 +224,7 @@ if [[ "Dawn" == "${SYSTEM}" ]]; then
     CMD1="python -m pip install tensorflow==2.15.0"
     CMD2="python -m pip install --upgrade intel-extension-for-tensorflow[xpu]"
 elif [[ "aac6" == "${SYSTEM}" ]]; then
-    CMD1="python -m pip install --upgrade --find-links https://repo.radeon.com/rocm/manylinux/rocm-rel-7.2/ tensorflow-rocm==2.20.0"
+    CMD1="python -m pip install --upgrade --find-links https://repo.radeon.com/rocm/manylinux/rocm-rel-7.2/ tensorflow-rocm==2.19.1"
     CMD2=""
 elif [[ "macOS" == "${SYSTEM}" ]]; then
     CMD1="python -m pip install tensorflow==2.18.0"
