@@ -221,14 +221,14 @@ echo ""
 echo "Installing packages:"
 
 if [[ "Dawn" == "${SYSTEM}" ]]; then
-    CMD1="python -m pip install tensorflow==2.15.0"
+    CMD1="python -m pip install tensorflow==2.15"
     CMD2="python -m pip install --upgrade intel-extension-for-tensorflow[xpu]"
 elif [[ "aac6" == "${SYSTEM}" ]]; then
-    CMD1="python -m pip install --upgrade --find-links https://repo.radeon.com/rocm/manylinux/rocm-rel-7.2/ tensorflow-rocm==2.19.1"
+    CMD1="python -m pip install --upgrade --find-links https://repo.radeon.com/rocm/manylinux/rocm-rel-7.2/ tensorflow-rocm==2.19"
     CMD2=""
 elif [[ "macOS" == "${SYSTEM}" ]]; then
-    CMD1="python -m pip install tensorflow==2.18.0"
-    CMD2="python -m pip install tensorflow-metal==1.2.0"
+    CMD1="python -m pip install tensorflow==2.18"
+    CMD2="python -m pip install tensorflow-metal==1.2"
 fi
 
 for CMD in "${CMD1}" "${CMD2}"; do
