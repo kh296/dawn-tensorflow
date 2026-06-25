@@ -240,10 +240,10 @@ CMD="python -c 'import tensorflow'"
 echo "${CMD}"
 eval "${CMD}"
 
-# Check available devices.
+# Check devices.
 echo ""
-echo "Checking available devices:"
-CMD="python -c 'from tensorflow.python.client import device_lib; print(device_lib.list_local_devices())'"
+echo "Checking devices:"
+CMD="python -c 'from tensorflow.python.client import device_lib; device_lib.list_local_devices()'"
 echo "${CMD}"
 eval "${CMD}"
 T2=${SECONDS}
