@@ -156,6 +156,8 @@ cat <<EOF >>${DAWN_SETUP}
 # Load modules.
 module purge
 module load rhel9/default-dawn
+module load intel-oneapi-mkl/2025.1.0
+module load intel-oneapi-ccl/2021.15.0
 EOF
 
 cat <<EOF >>${MACOS_SETUP}
@@ -200,7 +202,7 @@ if [[ "Dawn" == "${SYSTEM}" ]]; then
     # Require Python version compatible with
     # wheel of intel-extension-for-tensorflow:
     # https://pypi.org/project/intel-extension-for-tensorflow/#files
-    PYTHON_VERSION="3.11"
+    PYTHON_VERSION="3.10"
 else
     PYTHON_VERSION="3.12"
 fi
