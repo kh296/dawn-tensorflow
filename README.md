@@ -21,8 +21,8 @@ guidance for installing `conda` on Dawn at:
 
 Installation of TensorFlow may be performed
 [via a Slurm job](#21-installation-via-a-slurm-job) or
-[from the command line](#22-installation-from-the-command-line).  As
-installation takes 30-60 minutes, the former is recommended
+[from the command line](#22-installation-from-the-command-line).  As the
+installation takes around 15 minutes, the former is recommended
 
 ### 2.1 Installation via a Slurm job
 
@@ -40,7 +40,7 @@ Submit a Slurm job to run the installation script:
 sbatch --account=<project_account> --export=CONDA_INSTALL="~/miniforge3" ./tensorflow_install.sh
 ```
 
-Once it starts running, the script should take 30-60 minutes to
+Once it starts running, the script should take around 15 minutes to
 complete.  The job output is written to `tensorflow_install.log`.  If the
 installation is successful, the last line of the output is the command
 to set up the environment for using TensorFlow.  This command references the
@@ -71,13 +71,18 @@ setup file `../envs/tensorflow-setup.sh`, created during installation.
 Installation of `TensorFlow` on Dawn is based on the documentation for
 [Intel XPU Software Installation](https://github.com/intel/intel-extension-for-tensorflow/blob/main/docs/install/install_for_xpu.md).
 
-The installation script [scripts/tensorflow_install.sh](scripts/tensorflow_install.sh)
-installs the latest stable versions of `torch`, `torchvision`, `torchaudio`,
-along with their dependencies.  If you want to install specific versions, you
-can edit the script to indicate this.  If you want to install additional
-packages, the suggested approach is to set up the `conda` environment for
-using TensorFlow, and then install the additional packages with `pip` or `conda`.
-For example, to add `pandas`, starting from the `scripts` directory, use:
+The installation script
+[scripts/tensorflow_install.sh](scripts/tensorflow_install.sh)
+installs the latest version of
+[intel-extension-for-tensorflow](https://github.com/intel/intel-extension-for-tensorflow)
+with pre-built binaries, and the compatible version of [tensorflow](https://github.com/tensorflow/tensorflow).  As of June 2026, the last version of
+intel-extension-for-tensorflow is [2.15.0.3](https://github.com/intel/intel-extension-for-tensorflow/releases/tag/v2.15.0.3), released in March 2025.  The
+result is that the latest version of `tensorflow` that can be used with
+Intel GPUs is behind the latest main version of `tensorflow`.  If you want
+to install additional packages, the suggested approach is to set up the `conda`
+environment for using TensorFlow, and then install the additional packages with
+`pip` or `conda`.  For example, to add `pandas`, starting from the `scripts`
+directory, use:
  ```
 source ../envs/tensorflow-setup.sh
 pip install pandas
