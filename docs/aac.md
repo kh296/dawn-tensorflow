@@ -19,7 +19,7 @@ for obtaining the TensorFlow installation script, an example submission command 
 sbatch --partition=1CN192C4G1H_MI300A_Ubuntu22  --cpus-per-gpu=48 --export=CONDA_INSTALL="~/miniforge3" ./tensorflow_install.sh
 ```
 
-Installation of `TensorFlow` on AAC6 using
+Installation of TensorFlow on AAC6 using
 [scripts/tensorflow_install.sh](../scripts/tensorflow_install.sh)
 is based on the documentation for
 [TensorFlow on ROCm installation](https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/3rd-party/tensorflow-install.html).
