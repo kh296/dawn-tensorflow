@@ -226,7 +226,7 @@ if [[ "Dawn" == "${SYSTEM}" ]]; then
     CMD1="python -m pip install tensorflow==2.15"
     CMD2="python -m pip install --upgrade intel-extension-for-tensorflow[xpu]"
 elif [[ "aac6" == "${SYSTEM}" ]]; then
-    CMD1="python -m pip install --upgrade --find-links https://repo.radeon.com/rocm/manylinux/rocm-rel-7.2/ tensorflow-rocm==2.19"
+    CMD1="python -m pip install --upgrade --find-links https://repo.radeon.com/rocm/manylinux/rocm-rel-7.2/ tensorflow-rocm==2.19.1"
     CMD2=""
 elif [[ "macOS" == "${SYSTEM}" ]]; then
     CMD1="python -m pip install tensorflow==2.18"
