@@ -105,7 +105,6 @@ while [[ $# -gt 0 ]]; do
         -l)
             if [[ -n "$2" && "$2" != -* ]]; then
                 CONDA_LINK="$2"
-                NO_LINK="false"
                 shift 2
             else
                 NO_LINK="true"
@@ -124,13 +123,9 @@ if [[ "true" == "${NO_LINK}" ]]; then
     CONDA_LINK_ECHO="undefined"
 else
     CONDA_LINK=$(echo "${CONDA_LINK//\'/~}" | sed "s|^~/|$HOME/|")
-    mkdir -p ${CONDA_LINK}
-    CONDA_LINK=$(realpath ${CONDA_LINK})
     CONDA_LINK_ECHO="${CONDA_LINK}"
 fi
 CONDA_INSTALL=$(echo "${CONDA_INSTALL//\'/~}" | sed "s|^~/|$HOME/|")
-mkdir -p ${CONDA_INSTALL}
-CONDA_INSTALL=$(realpath ${CONDA_INSTALL})
 
 # Start timer.
 T0=${SECONDS}
@@ -153,7 +148,6 @@ rm -f "${INSTALL_SCRIPT}"
 # Ensure that CONDA_LINK is path to conda installation.
 if [ -n "${CONDA_LINK}" ]; then
     ln -s "${CONDA_INSTALL}" "${CONDA_LINK}"
-    CONDA_LINK=$(realpath ${CONDA_LINK})
 else
     CONDA_LINK=${CONDA_INSTALL}
 fi
