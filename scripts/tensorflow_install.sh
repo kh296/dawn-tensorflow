@@ -94,6 +94,8 @@ fi
 # Determine system being used.
 if [[ "$(hostname)" == "pvc-s"* ]]; then
     SYSTEM="Dawn"
+elif [[ "$(hostname)" == "gpu-u"* ]]; then
+    SYSTEM="Zenith"
 elif [[ "$(hostname)" == *"-pl1"* ]]; then
     SYSTEM="aac6"
 elif [[ "${OSTYPE}" == "darwin"* ]]; then
@@ -135,10 +137,13 @@ ENVS_DIR=$(realpath ..)/envs
 mkdir -p ${ENVS_DIR}
 SETUP="${ENVS_DIR}/${CONDA_ENV}-setup.sh"
 DAWN_SETUP="/dev/null"
+ZENITH_SETUP="/dev/null"
 AAC6_SETUP="/dev/null"
 MACOS_SETUP="/dev/null"
 if [[ "Dawn" == "${SYSTEM}" ]]; then
     DAWN_SETUP="${SETUP}"
+elif [[ "Zenith" == "${SYSTEM}" ]]; then
+    ZENITH_SETUP="${SETUP}"
 elif [[ "aac6" == "${SYSTEM}" ]]; then
     AAC6_SETUP="${SETUP}"
 elif [[ "macOS" == "${SYSTEM}" ]]; then
@@ -158,6 +163,13 @@ module purge
 module load rhel9/default-dawn
 module load intel-oneapi-mkl/2025.1.0
 module load intel-oneapi-ccl/2021.15.0
+EOF
+
+cat <<EOF >>${ZENITH_SETUP}
+# Load modules.
+module purge
+module load rhel9/mi355x/base
+module load openmpi/5.0.10
 EOF
 
 cat <<EOF >>${MACOS_SETUP}
@@ -221,11 +233,15 @@ echo "${CMD}"
 eval "${CMD}"
 echo ""
 echo "Installing packages:"
+CMD="python -m pip install uv"
+echo ""
+echo "${CMD}"
+eval "${CMD}"
 
 if [[ "Dawn" == "${SYSTEM}" ]]; then
     CMD1="python -m pip install tensorflow==2.15"
     CMD2="python -m pip install --upgrade intel-extension-for-tensorflow[xpu]"
-elif [[ "aac6" == "${SYSTEM}" ]]; then
+elif [[ "aac6" == "${SYSTEM}" || "Zenith" == "${SYSTEM}" ]]; then
     CMD1="python -m pip install --upgrade --find-links https://repo.radeon.com/rocm/manylinux/rocm-rel-7.2/ tensorflow-rocm==2.19.1"
     CMD2=""
 elif [[ "macOS" == "${SYSTEM}" ]]; then
