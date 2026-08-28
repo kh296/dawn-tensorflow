@@ -242,8 +242,8 @@ if [[ "Dawn" == "${SYSTEM}" ]]; then
     CMD1="python -m pip install tensorflow==2.15"
     CMD2="python -m pip install --upgrade intel-extension-for-tensorflow[xpu]"
 elif [[ "Zenith" == "${SYSTEM}" ]]; then
-    CMD1="uv pip install --index-url https://stable.repo.amd.com/rocm/whl-next/ rocm[libraries,device-gfx950]==10.0.0"
-    CMD2="uv pip install --extra-index-url https://rocm.frameworks.amd.com/whl-multi-arch/ tensorflow-rocm==2.21.0+rocm10.0.0"
+    CMD1="uv pip install https://rocm.frameworks.amd.com/whl-multi-arch/tensorflow-rocm/tensorflow_rocm-2.22.0%2Brocm7.14.0-cp312-cp312-linux_x86_64.whl"
+    CMD2=""
 elif [[ "aac6" == "${SYSTEM}" ]]; then
     CMD1="python -m pip install --upgrade --find-links https://repo.radeon.com/rocm/manylinux/rocm-rel-7.2/ tensorflow-rocm==2.19.1"
     CMD2=""
