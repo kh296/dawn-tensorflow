@@ -260,6 +260,10 @@ for CMD in "${CMD1}" "${CMD2}"; do
     fi
 done
 
+echo ""
+echo "Installation of ${PROJECT_NAME} for ${OSTYPE} on $(hostname) completed: $(date)"
+echo "Time for installation: $((${SECONDS}-${T0})) seconds"
+
 T1=${SECONDS}
 
 # Check imports.
@@ -278,8 +282,6 @@ eval "${CMD}"
 T2=${SECONDS}
 
 echo ""
-echo "Installation of ${PROJECT_NAME} for ${OSTYPE} on $(hostname) completed: $(date)"
-echo "Time for installation: $((${T1}-${T0})) seconds"
 echo "Time for installation checks: $((${T2}-${T1})) seconds"
 
 echo ""
